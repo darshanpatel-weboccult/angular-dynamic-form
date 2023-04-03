@@ -257,7 +257,7 @@
       </div>
     </form>
   </div>
-  <button (click)="formProvider.addHouseForm()" class="btn btn-success">
+  <button *ngIf="!formProvider.isEdit" (click)="formProvider.addHouseForm()" class="btn btn-success">
     Add More House
   </button>
 </div>
