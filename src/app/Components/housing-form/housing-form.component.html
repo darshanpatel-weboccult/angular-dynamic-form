@@ -1,0 +1,263 @@
+<div class="container-main">
+  <div
+    class="container-house"
+    *ngFor="let house of formsArray; let houseIndex = index"
+  >
+    <form
+      [formGroup]="house"
+      (ngSubmit)="formProvider.handleSubmit(houseIndex)"
+    >
+      <label [for]="'houseName' + houseIndex"
+        >House Name:
+        <input
+          [id]="'houseName' + houseIndex"
+          type="text"
+          formControlName="name"
+          placeholder="House Name"
+        />
+        <span
+          class="error"
+          *ngIf="
+            house.get('name')?.touched &&
+            house.get('name')?.hasError('required')
+          "
+          >Name is Required</span
+        >
+      </label>
+      <label
+        >House type:
+        <div class="container-radio">
+          <label [for]="'radioSm' + houseIndex"
+            >Small<input
+              [id]="'radioSm' + houseIndex"
+              type="radio"
+              value="small"
+              formControlName="type"
+            />
+            |
+          </label>
+          <label [for]="'radioMd' + houseIndex"
+            >Medium<input
+              [id]="'radioMd' + houseIndex"
+              type="radio"
+              value="medium"
+              formControlName="type"
+            />
+            |
+          </label>
+          <label [for]="'radioLg' + houseIndex"
+            >Large<input
+              [id]="'radioLg' + houseIndex"
+              type="radio"
+              value="large"
+              formControlName="type"
+          /></label></div
+      ></label>
+      <button
+        type="button"
+        class="btn btn-info"
+        (click)="formProvider.addAddressForm(houseIndex)"
+      >
+        Add Address
+      </button>
+      <div
+        class="container-addresses"
+        formArrayName="addresses"
+        *ngFor="
+          let address of getAddresses(houseIndex);
+          let addressIndex = index
+        "
+      >
+        <div class="container-address" [formGroupName]="addressIndex">
+          <label [for]="'plot' + addressIndex">
+            Plot No.
+            <input
+              type="text"
+              [id]="'plot' + addressIndex"
+              placeholder="Plot No."
+              formControlName="plot"
+            />
+            <span
+              class="error"
+              *ngIf="
+                address.get('plot')?.touched &&
+                address.get('plot')?.hasError('required')
+              "
+              >Plot No. is Required</span
+            >
+          </label>
+          <label [for]="'area' + addressIndex">
+            Area
+            <input
+              type="text"
+              [id]="'area' + addressIndex"
+              placeholder="Area"
+              formControlName="area"
+            />
+            <span
+              class="error"
+              *ngIf="
+                address.get('area')?.touched &&
+                address.get('area')?.hasError('required')
+              "
+              >Area is Required</span
+            >
+          </label>
+          <label [for]="'pin' + addressIndex">
+            Pin Code
+            <input
+              type="number"
+              [id]="'pin' + addressIndex"
+              placeholder="Pin code"
+              formControlName="pin"
+            />
+            <span
+              class="error"
+              *ngIf="
+                address.get('pin')?.touched &&
+                address.get('pin')?.hasError('required')
+              "
+              >Pin Code is Required</span
+            >
+            <span
+              class="error"
+              *ngIf="
+                address.get('pin')?.touched &&
+                address.get('pin')?.hasError('length')
+              "
+              >Pin Must be of 6 digits</span
+            >
+          </label>
+          <div class="container-action">
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="formProvider.deleteAddress(houseIndex, addressIndex)"
+            >
+              Delete Address
+            </button>
+            <button
+              type="button"
+              class="btn btn-info"
+              (click)="formProvider.addPersonForm(houseIndex, addressIndex)"
+            >
+              Add Person
+            </button>
+          </div>
+          <div class="container-persons">
+            <ng-container
+              formArrayName="persons"
+              *ngFor="
+                let person of getPersons(houseIndex, addressIndex);
+                let personIndex = index
+              "
+            >
+              <div class="container-person" [formGroupName]="personIndex">
+                <label [for]="'name' + personIndex"
+                  >Name:
+                  <input
+                    type="text"
+                    placeholder="Name"
+                    formControlName="name"
+                    [id]="'name' + personIndex"
+                  />
+                  <span
+                    class="error"
+                    *ngIf="
+                      person.get('name')?.touched &&
+                      person.get('name')?.hasError('required')
+                    "
+                    >Name is Required</span
+                  >
+                </label>
+                <label [for]="'age' + personIndex"
+                  >Age:
+                  <input
+                    type="number"
+                    placeholder="Age"
+                    formControlName="age"
+                    [id]="'age' + personIndex"
+                  />
+                  <span
+                    class="error"
+                    *ngIf="
+                      person.get('age')?.touched &&
+                      person.get('age')?.hasError('required')
+                    "
+                    >Age is Required</span
+                  >
+                  <span
+                    class="error"
+                    *ngIf="
+                      person.get('age')?.touched &&
+                      person.get('age')?.hasError('age')
+                    "
+                    >Age must Be Greater Than 0</span
+                  >
+                </label>
+                <label [for]="'gender' + personIndex"
+                  >Gender:
+                  <div class="container-radio">
+                    <label [for]="'genderMale' + personIndex">
+                      Male
+                      <input
+                        type="radio"
+                        formControlName="gender"
+                        value="male"
+                        [id]="'genderMale' + personIndex"
+                      />
+                    </label>
+                    <label [for]="'genderFemale' + personIndex">
+                      Female
+                      <input
+                        type="radio"
+                        formControlName="gender"
+                        value="female"
+                        [id]="'genderFemale' + personIndex"
+                      />
+                    </label>
+                  </div>
+                </label>
+                <div class="container-action">
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    (click)="
+                      formProvider.deletePerson(
+                        houseIndex,
+                        addressIndex,
+                        personIndex
+                      )
+                    "
+                  >
+                    Delete Person
+                  </button>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="container-action">
+        <button
+          type="submit"
+          [title]="!house.valid ? 'Fill Form Properly' : 'Submit Form'"
+          [disabled]="!house.valid"
+          class="btn btn-success"
+        >
+          {{ formProvider.isEdit ? "Update" : "Submit" }}
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="formProvider.removeHouse(houseIndex)"
+        >
+          {{ formProvider.isEdit ? "Cancel" : "Remove" }}
+        </button>
+      </div>
+    </form>
+  </div>
+  <button (click)="formProvider.addHouseForm()" class="btn btn-success">
+    Add More House
+  </button>
+</div>

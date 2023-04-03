@@ -1,0 +1,46 @@
+<div class="title">
+  <h1>Display Housing Forms</h1>
+</div>
+<div class="container-houses">
+  <div
+    class="container-house"
+    *ngFor="let house of houses; let houseIndex = index"
+  >
+    <div class="container-house-title">
+      <h3>
+        House No. {{ houseIndex }}
+        <button class="btn btn-base" (click)="updateHouse(houseIndex)">
+          Update
+        </button>
+      </h3>
+      <button class="btn btn-danger" (click)="deleteHouse(houseIndex)">
+        Delete
+      </button>
+    </div>
+    <p>House Name: {{ house.name }}</p>
+    <p>House Type: {{ house.type }}</p>
+    <p>House Id: {{ house.id }}</p>
+    <div class="container-addresses">
+      <div
+        class="container-address"
+        *ngFor="let address of house.addresses; let addressIndex = index"
+      >
+        <h3>Address {{ addressIndex }}</h3>
+        <p>Plot No.: {{ address.plot }}</p>
+        <p>Area: {{ address.area }}</p>
+        <p>Pin Code: {{ address.pin }}</p>
+        <div class="container-persons">
+          <div
+            class="container-person"
+            *ngFor="let person of address.persons; let personIndex = index"
+          >
+            <h3>Person {{ personIndex }}</h3>
+            <p>Name: {{ person.name }}</p>
+            <p>Age: {{ person.age }}</p>
+            <p>Gender: {{ person.gender | uppercase }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

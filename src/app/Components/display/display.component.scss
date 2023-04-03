@@ -1,0 +1,61 @@
+.title {
+  padding: 10px;
+  border: 1px solid silver;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.container-houses {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  max-height: 80vh;
+  overflow: hidden auto;
+  .container-house {
+    border: 1px solid silver;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    .container-house-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .btn-base {
+        margin-left: 15px;
+      }
+    }
+  }
+  .container-addresses {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px;
+    .container-address {
+      padding: 5px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      border: 1px solid silver;
+    }
+  }
+  .container-persons {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px;
+    .container-person {
+      padding: 5px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      border: 1px solid silver;
+    }
+  }
+}
+p {
+  border: 1px solid silver;
+  padding: 5px;
+  border-radius: 5px;
+}

@@ -1,1 +1,54 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Inter', sans-serif;
+}
+.wrapper{
+    width: min(1440px, 100%);
+    margin: auto;
+}
+
+// for dom css proper behavior
+router-outlet{
+    display: none;
+}
+
+.btn{
+    padding: 10px ;
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.btn:disabled{
+    cursor: not-allowed;
+    filter: opacity(0.5);
+}
+
+.btn-base{
+    background-color: gray;
+    color: white;
+}
+.btn-success{
+    background-color: green;
+    color: white;
+}
+.btn-info{
+    background-color: rgb(0, 119, 255);
+    color: white;
+}
+.btn-danger{
+    background-color: red;
+    color: white;
+}
+.btn-warning{
+    background-color: gold;
+    color: black;
+}
+.error{
+    color: red;
+}

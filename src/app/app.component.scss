@@ -1,0 +1,17 @@
+header {
+  position: sticky;
+  background-color: white;
+  z-index: 2;
+  top: 0;
+  & > div {
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+    justify-content: space-around;
+    ul {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+  }
+}
